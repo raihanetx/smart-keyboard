@@ -51,6 +51,7 @@ public class SmartKeyboardService extends InputMethodService {
     private View[] voiceBars = new View[5];
 
     private SpeechRecognizer speechRecognizer;
+    private GeminiLiveService geminiService;
     private boolean isRecording = false;
     private boolean isShifted = false;
     private boolean isCapsLock = false;
@@ -440,6 +441,8 @@ public class SmartKeyboardService extends InputMethodService {
     }
 
     private void initVoice() {
+        geminiService = new GeminiLiveService();
+        
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override public void onReadyForSpeech(Bundle params) {
@@ -478,6 +481,9 @@ public class SmartKeyboardService extends InputMethodService {
 
     private void toggleVoice() {
         if (isRecording) {
+            if (geminiService != null) {
+                geminiService.stop();
+            }
             speechRecognizer.stopListening();
             isRecording = false;
             voiceStatus.setText("VOICE MODE");
@@ -485,17 +491,60 @@ public class SmartKeyboardService extends InputMethodService {
             stopVoiceAnimation();
             btnVoice.setColorFilter(Color.parseColor("#9ca3af"));
         } else {
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, isLangBangla ? "bn-BD" : "en-US");
-            intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
-            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
-
-            speechRecognizer.startListening(intent);
-            isRecording = true;
-            startVoiceAnimation();
+            voiceStatus.setText("CONNECTING...");
+            voiceHint.setText("Starting Gemini AI...");
             btnVoice.setColorFilter(Color.parseColor("#ef4444"));
+            startVoiceAnimation();
+            
+            geminiService.start(new GeminiLiveService.GeminiCallback() {
+                @Override
+                public void onConnected() {
+                    voiceStatus.setText("LISTENING");
+                    voiceHint.setText("Speak now - Gemini AI");
+                    isRecording = true;
+                }
+
+                @Override
+                public void onTranscript(String text, boolean isFinal) {
+                    voiceHint.setText(text);
+                    if (isFinal && text != null && !text.isEmpty()) {
+                        sendText(text + " ");
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    voiceStatus.setText("ERROR");
+                    voiceHint.setText(error);
+                    stopVoiceAnimation();
+                    btnVoice.setColorFilter(Color.parseColor("#9ca3af"));
+                    isRecording = false;
+                    
+                    // Fallback to native speech recognizer
+                    startFallbackVoice();
+                }
+
+                @Override
+                public void onDisconnected() {
+                    isRecording = false;
+                    stopVoiceAnimation();
+                    btnVoice.setColorFilter(Color.parseColor("#9ca3af"));
+                }
+            });
         }
+    }
+
+    private void startFallbackVoice() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, isLangBangla ? "bn-BD" : "en-US");
+        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+
+        speechRecognizer.startListening(intent);
+        isRecording = true;
+        startVoiceAnimation();
+        btnVoice.setColorFilter(Color.parseColor("#ef4444"));
     }
 
     private void startVoiceAnimation() {
@@ -609,6 +658,9 @@ public class SmartKeyboardService extends InputMethodService {
 
     @Override
     public void onDestroy() {
+        if (geminiService != null) {
+            geminiService.stop();
+        }
         if (speechRecognizer != null) {
             speechRecognizer.destroy();
         }
