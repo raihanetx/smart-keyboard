@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="18%p"
+    android:keyHeight="54dp"
+    android:horizontalGap="2%p"
+    android:verticalGap="4dp">
+
+    <Row>
+        <Key android:codes="1" android:keyLabel="Ctrl+A\nSelect All" android:keyEdgeFlags="left"/>
+        <Key android:codes="2" android:keyLabel="Ctrl+C\nCopy"/>
+        <Key android:codes="3" android:keyLabel="Ctrl+V\nPaste"/>
+        <Key android:codes="4" android:keyLabel="Ctrl+X\nCut" android:keyEdgeFlags="right"/>
+    </Row>
+
+    <Row>
+        <Key android:codes="5" android:keyLabel="Ctrl+Z\nUndo" android:keyEdgeFlags="left"/>
+        <Key android:codes="-11" android:keyLabel="Esc"/>
+        <Key android:codes="-12" android:keyLabel="Tab"/>
+        <Key android:codes="-7" android:keyLabel="Select\nAll" android:keyEdgeFlags="right"/>
+    </Row>
+
+    <Row android:rowEdgeFlags="bottom">
+        <Key android:codes="-8" android:keyLabel="Copy" android:keyEdgeFlags="left"/>
+        <Key android:codes="-9" android:keyLabel="Paste"/>
+        <Key android:codes="-10" android:keyLabel="Cut"/>
+        <Key android:codes="-3" android:keyLabel="Back" android:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>
