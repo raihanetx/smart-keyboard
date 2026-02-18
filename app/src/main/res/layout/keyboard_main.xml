@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#1a1a2e"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#2d2d44"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:weightSum="5">
+
+        <ImageView
+            android:id="@+id/btn_lang"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_globe"
+            android:contentDescription="Language"
+            android:padding="4dp"
+            android:tint="#9ca3af" />
+
+        <ImageView
+            android:id="@+id/btn_translate"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_translate"
+            android:contentDescription="Translate"
+            android:padding="4dp"
+            android:tint="#9ca3af" />
+
+        <ImageView
+            android:id="@+id/btn_voice"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_mic"
+            android:contentDescription="Voice"
+            android:padding="4dp"
+            android:tint="#9ca3af" />
+
+        <ImageView
+            android:id="@+id/btn_clipboard"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_clipboard"
+            android:contentDescription="Clipboard"
+            android:padding="4dp"
+            android:tint="#9ca3af" />
+
+        <ImageView
+            android:id="@+id/btn_emoji"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_emoji"
+            android:contentDescription="Emoji"
+            android:padding="4dp"
+            android:tint="#9ca3af" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_voice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2d2d44"
+        android:padding="16dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:gravity="bottom|center">
+
+            <View android:id="@+id/bar1" style="@style/VoiceBar" />
+            <View android:id="@+id/bar2" style="@style/VoiceBar" />
+            <View android:id="@+id/bar3" style="@style/VoiceBar" />
+            <View android:id="@+id/bar4" style="@style/VoiceBar" />
+            <View android:id="@+id/bar5" style="@style/VoiceBar" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/voice_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOICE MODE"
+            android:textColor="#ef4444"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/voice_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap mic to start"
+            android:textColor="#6b7280"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_translate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2d2d44"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/trans_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bangla"
+                android:background="#374151"
+                android:padding="8dp"
+                android:textColor="#e5e7eb"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/trans_swap"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_swap"
+                android:layout_marginHorizontal="16dp"
+                android:tint="#3b82f6" />
+
+            <TextView
+                android:id="@+id/trans_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="English"
+                android:background="#374151"
+                android:padding="8dp"
+                android:textColor="#e5e7eb"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/trans_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1a1a2e"
+            android:padding="12dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:hint="Translate..."
+            android:textColorHint="#6b7280"
+            android:layout_marginTop="12dp" />
+
+        <TextView
+            android:id="@+id/trans_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#d1d5db"
+            android:textSize="14sp"
+            android:layout_marginTop="12dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_clipboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2d2d44"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/clipboard_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clipboard is empty"
+            android:textColor="#6b7280"
+            android:gravity="center"
+            android:padding="16dp" />
+
+        <LinearLayout
+            android:id="@+id/clipboard_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emoji_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2d2d44"
+        android:padding="16dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/keyboard_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+</LinearLayout>

@@ -1,0 +1,2 @@
+-keep public class * extends android.inputmethodservice.InputMethodService
+-keepattributes *Annotation*

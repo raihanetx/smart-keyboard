@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="KeyButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/key_bg</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="KeyButton.Special">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">0</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:background">@drawable/key_bg_special</item>
+    </style>
+
+    <style name="KeyButton.Enter">
+        <item name="android:background">@drawable/key_bg_enter</item>
+        <item name="android:minWidth">56dp</item>
+    </style>
+
+    <style name="KeyButton.Shift">
+        <item name="android:background">@drawable/key_bg_shift</item>
+        <item name="android:minWidth">48dp</item>
+    </style>
+
+    <style name="VoiceBar">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:background">@drawable/voice_bar</item>
+    </style>
+
+    <style name="ClipboardItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/clipboard_item_bg</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+</resources>
